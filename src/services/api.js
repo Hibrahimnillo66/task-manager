@@ -1,37 +1,51 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = 'https://task-manager-backend-fc9b159cd82e.herokuapp.com/api';
 
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  console.log('Token:', token);  // Add this line for debugging
-  return {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : '',
-    },
-  };
+const getToken = () => {
+  return localStorage.getItem('token');
 };
 
 export const getAllTasks = async () => {
-  const response = await axios.get(`${API_URL}/api/tasks`, getAuthHeaders());
+  const response = await axios.get(`${API_URL}/tasks`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
   return response.data;
 };
 
 export const getTaskById = async (id) => {
-  const response = await axios.get(`${API_URL}/api/tasks/${id}`, getAuthHeaders());
+  const response = await axios.get(`${API_URL}/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
   return response.data;
 };
 
 export const createTask = async (task) => {
-  const response = await axios.post(`${API_URL}/api/tasks`, task, getAuthHeaders());
+  const response = await axios.post(`${API_URL}/tasks`, task, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
   return response.data;
 };
 
 export const updateTask = async (id, task) => {
-  const response = await axios.put(`${API_URL}/api/tasks/${id}`, task, getAuthHeaders());
+  const response = await axios.put(`${API_URL}/tasks/${id}`, task, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
   return response.data;
 };
 
 export const deleteTask = async (id) => {
-  await axios.delete(`${API_URL}/api/tasks/${id}`, getAuthHeaders());
+  await axios.delete(`${API_URL}/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 };

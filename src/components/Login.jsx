@@ -15,17 +15,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/authenticate`, credentials);
-      if (response.data.token) {
-        console.log('Token received:', response.data.token);
-        localStorage.setItem('token', response.data.token);
-        setIsAuthenticated(true);
-        navigate('/tasks');
-      } else {
-        console.error('No token received in response:', response.data);
-      }
+      const response = await axios.post('https://task-manager-backend-fc9b159cd82e.herokuapp.com/api/authenticate', credentials);
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      setIsAuthenticated(true);
+      navigate('/tasks');
     } catch (error) {
-      console.error('Error logging in', error.response || error.message || error);
+      console.error('Error logging in', error);
     }
   };
 
