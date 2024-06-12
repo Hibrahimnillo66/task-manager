@@ -4,6 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL || '';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
+  console.log('Token:', token);  // Add this line for debugging
   return {
     headers: {
       Authorization: token ? `Bearer ${token}` : '',

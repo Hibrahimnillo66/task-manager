@@ -16,11 +16,16 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/authenticate`, credentials);
-      localStorage.setItem('token', response.data.token);
-      setIsAuthenticated(true);
-      navigate('/tasks');
+      if (response.data.token) {
+        console.log('Token received:', response.data.token);
+        localStorage.setItem('token', response.data.token);
+        setIsAuthenticated(true);
+        navigate('/tasks');
+      } else {
+        console.error('No token received in response:', response.data);
+      }
     } catch (error) {
-      console.error('Error logging in', error);
+      console.error('Error logging in', error.response || error.message || error);
     }
   };
 
