@@ -10,7 +10,12 @@ function TaskList() {
     const fetchTasks = async () => {
       try {
         const tasks = await getAllTasks();
-        setTasks(tasks);
+        if (Array.isArray(tasks)) {
+          setTasks(tasks);
+        } else {
+          console.error('Expected an array of tasks but got:', tasks);
+          setTasks([]);
+        }
       } catch (error) {
         console.error('Error fetching tasks', error);
       }
