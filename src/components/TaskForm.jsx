@@ -16,7 +16,7 @@ function TaskForm() {
       await createTask(task);
       navigate('/tasks');
     } catch (error) {
-      console.error('Error creating task', error);
+      console.error('Error creating task', error.response || error.message || error);
     }
   };
 

@@ -17,7 +17,7 @@ function TaskList() {
           setTasks([]);
         }
       } catch (error) {
-        console.error('Error fetching tasks', error);
+        console.error('Error fetching tasks', error.response || error.message || error);
       }
     };
 
