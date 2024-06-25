@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://task-manager-backend-fc9b159cd82e.herokuapp.com/api';
+//const API_URL = 'https://task-manager-backend-fc9b159cd82e.herokuapp.com/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const getToken = () => {
   return localStorage.getItem('token');
