@@ -8,6 +8,8 @@ import { AuthContext } from '../context/AuthContext';
 import Modal from './Modal';
 import TaskForm from './TaskForm';
 import Button from './Button';
+import { format } from 'date-fns';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -96,7 +98,7 @@ const TaskList = () => {
   return (
     <div className="flex">
       <Navigation />
-      <div className={`w-5/6 p-4 flex-grow ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+      <div className={`w-5/6 p-12 flex-grow ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
         <h1 className="text-2xl font-bold mb-6">Active Issues</h1>
         <div className="flex mb-4">
           <Button onClick={handleAddNew} className="mr-4">Add New Task</Button>
@@ -110,21 +112,29 @@ const TaskList = () => {
         </div>
         <div className="mb-2">
           <div className={`grid grid-cols-6 gap-4 font-bold p-2 border-b ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}>
-            <div>Task ID</div>
+            {/* <div>Task ID</div> */}
             <div>Task Name</div>
             <div>Date</div>
+            <div>Task Owner</div>
+            <div>Task Category</div>
             <div>Status</div>
             <div>Actions</div>
           </div>
           {currentTasks.map((task) => (
             <div key={task.id} className={`grid grid-cols-6 gap-4 p-2 border-b ${theme === 'dark' ? 'border-gray-600 bg-gray-800 text-white' : 'border-gray-300 bg-white text-black'}`}>
-              <div>{task.id}</div>
+              {/* <div>TID - {task.id.slice(0, 8)}</div> */}
               <div>{task.name}</div>
-              <div>{task.date}</div>
+              <div>{format(new Date(task.date), 'MMM dd yyyy')}</div>
+              <div>{task.owner}</div>
+              <div>{task.category}</div>
               <div>{task.status}</div>
               <div className="flex space-x-2">
-                <Button onClick={() => handleEdit(task.id)} className="mr-2">Edit</Button>
-                <Button onClick={() => handleDelete(task.id)}>Delete</Button>
+                <button onClick={() => handleEdit(task.id)} className="text-gray-600 hover:text-gray-400">
+                  <FaEdit />
+                </button>
+                <button onClick={() => handleDelete(task.id)} className="text-gray-600 hover:text-gray-400">
+                  <FaTrash />
+                </button>
               </div>
             </div>
           ))}
