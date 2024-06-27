@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const API_URL = 'https://task-manager-backend-fc9b159cd82e.herokuapp.com/api';
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://task-manager-backend-fc9b159cd82e.herokuapp.com/api';
+//const API_URL = 'http://localhost:8080';
 
 const getToken = () => {
   return localStorage.getItem('token');
