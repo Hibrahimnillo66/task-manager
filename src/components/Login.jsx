@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://task-manager-backend-fc9b159cd82e.herokuapp.com/api/authenticate', credentials);
+      const response = await axios.post('https://task-manager-backend-fc9b159cd82e.herokuapp.com/api/auth/authenticate', credentials);
       const token = response.data.token;
       localStorage.setItem('token', token);
       setIsAuthenticated(true);
